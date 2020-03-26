@@ -17,11 +17,13 @@ service.listen(port)
 link.startAnnouncing('update_orders', service.port, {interval: 1000})
 
 console.log('Client: ', port);
+
 service.on('request', (rid, key, payload, handler) => {
     switch (key) {
         case 'update_orders':
             console.log(`${rid},\n ${key},\n`, payload);
-            const msg = `New Order: ${payload.msg}`
+            const msg = `${payload.msg}`
+            console.log(`Order Updated: ${msg}`);
             handler.reply(null, msg)    
             break;
         default:

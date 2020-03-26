@@ -43,10 +43,17 @@ service.on('request', (rid, key, payload, handler) => {
 })
 
 function updateOrders(hash) {
-	client.map('update_orders', { msg: hash }, { timeout: 10000 }, (err, data) => {
-      if (err) {
-        console.error(err)
-      }
-      console.log('data: ', data);
-    })
+	link.lookup('update_orders', (err,data) => {
+		if (data.length > 1) {
+			client.map('update_orders', { msg: hash }, { timeout: 10000 }, (err, data) => {
+			  console.log("Order Updated");
+			})
+		} else {
+			client.request('update_orders', { msg: hash }, { timeout: 10000 }, (err, data) => {
+			  console.log("Order Updated");
+			})
+		}
+	})
+
 }
+

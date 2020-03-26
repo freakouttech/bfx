@@ -43,5 +43,7 @@ node lib/get_order.js ${orderHash}
 
 ### TO DO
 
-1) Promisify the code
+1) Promisify the code; Couldn't get util.promisify to work properly.
+2) Switch Put to putMutable that way the has can be worked out prior to put
+3) Exit Clean Up, kept getting connections over lapping. Proper server clean up might result in better additional requests
 
